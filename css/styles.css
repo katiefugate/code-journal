@@ -1,0 +1,72 @@
+header {
+  background-color: #562b81;
+}
+
+.codeJournal {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 0.75px;
+  font-size: 1.3rem;
+}
+
+.inputTitle,
+.pageTitle {
+  font-family: 'Nunito Sans', sans-serif;
+  letter-spacing: 0.75px;
+}
+
+#title,
+#url,
+#notes {
+  border: 2px solid rgb(194, 194, 194);
+  border-radius: 5px;
+}
+
+#notes {
+  resize: none;
+}
+
+#title:focus,
+#url:focus,
+#notes:focus {
+  outline: none;
+  border-color: #562b81;
+}
+
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+.placeholder {
+  border: 1px solid rgb(240, 240, 240);
+  border-radius: 5px;
+}
+
+#saveButton {
+  background-color: #562b81;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: 1px solid #562b81;
+  border-radius: 5px;
+  align-self: flex-end;
+}
+
+#saveButton:focus {
+  outline: none;
+}
+
+.column-full {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  #title,
+  #url,
+  #notes {
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 5px;
+  }
+}

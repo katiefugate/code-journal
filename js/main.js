@@ -4,6 +4,7 @@
 var form = document.querySelector('form');
 var photoUrl = document.querySelector('#url');
 var img = document.querySelector('.placeholder');
+var ul = document.querySelector('.entries');
 
 function photoUrlHandler(event) {
   img.setAttribute('src', photoUrl.value);
@@ -20,6 +21,9 @@ function saveButtonHandler(event) {
   data.entries.unshift(entriesObj);
   img.setAttribute('src', 'images/placeholder-image-square.jpg');
   form.reset();
+  entriesContainer.className = 'container';
+  formContainer.className = 'container hidden';
+  addEntry(entriesObj);
 }
 
 photoUrl.addEventListener('input', photoUrlHandler);
@@ -27,7 +31,6 @@ photoUrl.addEventListener('input', photoUrlHandler);
 form.addEventListener('submit', saveButtonHandler);
 
 function addEntry(entry) {
-  var ul = document.querySelector('.entries');
   var entryLi = document.createElement('li');
   var row = document.createElement('div');
   var columnHalf = document.createElement('div');
@@ -52,6 +55,7 @@ function addEntry(entry) {
   img.setAttribute('src', entry.url);
   titleH2.textContent = entry.title;
   notesP.textContent = entry.notes;
+  ul.prepend(entryLi);
 }
 
 function contentLoadHandler(event) {
@@ -61,3 +65,24 @@ function contentLoadHandler(event) {
 }
 
 window.addEventListener('DOMContentLoaded', contentLoadHandler);
+
+var entriesLink = document.querySelector('.entries-link');
+var entriesContainer = document.querySelector('#entriesContainer');
+var formContainer = document.querySelector('#formContainer');
+
+function entriesLinkHandler(event) {
+  entriesContainer.className = 'container';
+  formContainer.className = 'container hidden';
+
+}
+
+entriesLink.addEventListener('click', entriesLinkHandler);
+
+var newButton = document.querySelector('.newEntry');
+
+function newButtonHandler(event) {
+  entriesContainer.className = 'container hidden';
+  formContainer.className = 'container';
+}
+
+newButton.addEventListener('click', newButtonHandler);

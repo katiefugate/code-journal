@@ -83,3 +83,23 @@ ul {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.6rem;
 }
+
+.entries-link {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.newEntry {
+  background-color: #562b81;
+  color: white;
+  border: 1px solid #562b81;
+  height: 2rem;
+  width: 4.25rem;
+  padding-top: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-family: 'Open Sans', sans-serif;
+}

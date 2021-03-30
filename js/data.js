@@ -7,14 +7,14 @@ var data = {
   nextEntryId: 1
 };
 
-var previousDataJSON = window.localStorage.getItem('cj-entry-form');
+var previousDataJSON = localStorage.getItem('cj-entry-form');
 if (previousDataJSON !== null) {
   data = JSON.parse(previousDataJSON);
 }
 
 function store(event) {
   var dataJSON = JSON.stringify(data);
-  window.localStorage.setItem('cj-entry-form', dataJSON);
+  localStorage.setItem('cj-entry-form', dataJSON);
 }
 
 window.addEventListener('beforeunload', store);

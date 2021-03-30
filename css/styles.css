@@ -22,6 +22,10 @@ header {
   border-radius: 5px;
 }
 
+#notes {
+  resize: none;
+}
+
 #title:focus,
 #url:focus,
 #notes:focus {
@@ -45,6 +49,10 @@ body {
   border: 1px solid #562b81;
   border-radius: 5px;
   align-self: flex-end;
+}
+
+#saveButton:focus {
+  outline: none;
 }
 
 .column-full {

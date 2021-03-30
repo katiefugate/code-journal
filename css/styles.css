@@ -70,3 +70,16 @@ body {
     border-radius: 5px;
   }
 }
+
+ul {
+  list-style-type: none;
+}
+
+.title-h2 {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.message-p {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6rem;
+}

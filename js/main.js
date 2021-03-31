@@ -24,7 +24,7 @@ function saveButtonHandler(event) {
   entriesContainer.className = 'container';
   formContainer.className = 'container hidden';
   ul.prepend(addEntry(entriesObj));
-  localStorage.setItem('current', 'entries-current');
+  data.view = 'entries';
 }
 
 photoUrl.addEventListener('input', photoUrlHandler);
@@ -61,8 +61,8 @@ function contentLoadHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
     ul.appendChild(addEntry(data.entries[i]));
   }
-  var currentPage = localStorage.getItem('current');
-  if (currentPage === 'entries-current') {
+
+  if (data.view === 'entries') {
     entriesContainer.className = 'container current';
     formContainer.className = 'container hidden';
   } else {
@@ -80,7 +80,7 @@ var formContainer = document.querySelector('#formContainer');
 function entriesLinkHandler(event) {
   entriesContainer.className = 'container current';
   formContainer.className = 'container hidden';
-  localStorage.setItem('current', 'entries-current');
+  data.view = 'entries';
 }
 
 entriesLink.addEventListener('click', entriesLinkHandler);
@@ -90,7 +90,7 @@ var newButton = document.querySelector('.newEntry');
 function newButtonHandler(event) {
   entriesContainer.className = 'container hidden';
   formContainer.className = 'container current';
-  localStorage.setItem('current', 'form-current');
+  data.view = 'entry-form';
 }
 
 newButton.addEventListener('click', newButtonHandler);

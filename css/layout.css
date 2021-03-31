@@ -46,7 +46,6 @@
 }
 
 img {
-  height: 20rem;
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -93,4 +92,8 @@ ul {
   .pageTitle {
     margin-left: 6%;
   }
+}
+
+.form-img {
+  height: 20rem;
 }

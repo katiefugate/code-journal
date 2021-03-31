@@ -9,14 +9,13 @@ var ul = document.querySelector('.entries');
 function photoUrlHandler(event) {
   img.setAttribute('src', photoUrl.value);
 }
-var entriesObj;
 
 function saveButtonHandler(event) {
   event.preventDefault();
   var title = form.elements.title.value;
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
-  entriesObj = { title, url, notes };
+  var entriesObj = { title, url, notes };
   entriesObj.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(entriesObj);
@@ -24,7 +23,7 @@ function saveButtonHandler(event) {
   form.reset();
   entriesContainer.className = 'container';
   formContainer.className = 'container hidden';
-  addEntry(entriesObj);
+  ul.prepend(addEntry(entriesObj));
   localStorage.setItem('current', 'entries-current');
 }
 
@@ -40,7 +39,6 @@ function addEntry(entry) {
   var columnHalf2 = document.createElement('div');
   var titleH2 = document.createElement('h2');
   var notesP = document.createElement('p');
-  ul.appendChild(entryLi);
   entryLi.appendChild(row);
   row.appendChild(columnHalf);
   columnHalf.appendChild(img);
@@ -57,9 +55,9 @@ function addEntry(entry) {
   img.setAttribute('src', entry.url);
   titleH2.textContent = entry.title;
   notesP.textContent = entry.notes;
-  if (entry === entriesObj) {
-    ul.prepend(entryLi);
-  }
+
+  var newEntry = ul.appendChild(entryLi);
+  return newEntry;
 }
 
 function contentLoadHandler(event) {

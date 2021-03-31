@@ -37,7 +37,7 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-.placeholder {
+img {
   border: 1px solid rgb(240, 240, 240);
   border-radius: 5px;
 }
@@ -69,4 +69,37 @@ body {
     border: 1px solid rgb(194, 194, 194);
     border-radius: 5px;
   }
+}
+
+ul {
+  list-style-type: none;
+}
+
+.title-h2 {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.notes-p {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6rem;
+}
+
+.entries-link {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.newEntry {
+  background-color: #562b81;
+  color: white;
+  border: 1px solid #562b81;
+  height: 2rem;
+  width: 4.25rem;
+  padding-top: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-family: 'Open Sans', sans-serif;
 }

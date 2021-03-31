@@ -103,3 +103,7 @@ ul {
   border-radius: 0.25rem;
   font-family: 'Open Sans', sans-serif;
 }
+
+.fas.fa-pen {
+  color: #562b81;
+}

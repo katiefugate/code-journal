@@ -45,7 +45,6 @@ function addEntry(entry) {
   row.appendChild(columnHalf2);
   columnHalf2.appendChild(titleH2);
   columnHalf2.appendChild(notesP);
-  ul.className = 'entries';
   entryLi.className = 'entry';
   row.className = 'row';
   columnHalf.className = 'column-half';
@@ -55,14 +54,12 @@ function addEntry(entry) {
   img.setAttribute('src', entry.url);
   titleH2.textContent = entry.title;
   notesP.textContent = entry.notes;
-
-  var newEntry = ul.appendChild(entryLi);
-  return newEntry;
+  return entryLi;
 }
 
 function contentLoadHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    addEntry(data.entries[i]);
+    ul.appendChild(addEntry(data.entries[i]));
   }
   var currentPage = localStorage.getItem('current');
   if (currentPage === 'entries-current') {

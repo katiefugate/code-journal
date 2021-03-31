@@ -3,7 +3,7 @@
 
 var form = document.querySelector('form');
 var photoUrl = document.querySelector('#url');
-var img = document.querySelector('.placeholder');
+var img = document.querySelector('.form-img');
 var ul = document.querySelector('.entries');
 
 function photoUrlHandler(event) {
@@ -25,6 +25,7 @@ function saveButtonHandler(event) {
   entriesContainer.className = 'container';
   formContainer.className = 'container hidden';
   addEntry(entriesObj);
+  localStorage.setItem('current', 'entries-current');
 }
 
 photoUrl.addEventListener('input', photoUrlHandler);

@@ -16,14 +16,28 @@ function saveButtonHandler(event) {
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
   var entriesObj = { title, url, notes };
-  entriesObj.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(entriesObj);
-  img.setAttribute('src', 'images/placeholder-image-square.jpg');
-  form.reset();
-  entriesContainer.className = 'container';
-  formContainer.className = 'container hidden';
-  ul.prepend(addEntry(entriesObj));
+  if (data.editing !== null) {
+    var currentEditId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (currentEditId === data.entries[i].entryId) {
+        data.entries[i].title = title;
+        data.entries[i].url = url;
+        data.entries[i].notes = notes;
+        entriesContainer.className = 'container current';
+        formContainer.className = 'container hidden';
+      }
+    }
+    data.editing = null;
+  } else {
+    entriesObj.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(entriesObj);
+    img.setAttribute('src', 'images/placeholder-image-square.jpg');
+    form.reset();
+    entriesContainer.className = 'container';
+    formContainer.className = 'container hidden';
+    ul.prepend(addEntry(entriesObj));
+  }
   data.view = 'entries';
 }
 
@@ -32,6 +46,7 @@ photoUrl.addEventListener('input', photoUrlHandler);
 form.addEventListener('submit', saveButtonHandler);
 
 function addEntry(entry) {
+
   var entryLi = document.createElement('li');
   var row = document.createElement('div');
   var columnHalf = document.createElement('div');
@@ -120,3 +135,11 @@ function editHandler(event) {
 }
 
 ul.addEventListener('click', editHandler);
+
+if (data.view === 'entries') {
+  entriesContainer.className = 'container current';
+  formContainer.className = 'container hidden';
+} else {
+  entriesContainer.className = 'container hidden';
+  formContainer.className = 'container current';
+}

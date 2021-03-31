@@ -9,13 +9,14 @@ var ul = document.querySelector('.entries');
 function photoUrlHandler(event) {
   img.setAttribute('src', photoUrl.value);
 }
+var entriesObj;
 
 function saveButtonHandler(event) {
   event.preventDefault();
   var title = form.elements.title.value;
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
-  var entriesObj = { title, url, notes };
+  entriesObj = { title, url, notes };
   entriesObj.entryId = data.nextEntryId;
   data.nextEntryId++;
   data.entries.unshift(entriesObj);
@@ -55,12 +56,22 @@ function addEntry(entry) {
   img.setAttribute('src', entry.url);
   titleH2.textContent = entry.title;
   notesP.textContent = entry.notes;
-  ul.prepend(entryLi);
+  if (entry === entriesObj) {
+    ul.prepend(entryLi);
+  }
 }
 
 function contentLoadHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
     addEntry(data.entries[i]);
+  }
+  var currentPage = localStorage.getItem('current');
+  if (currentPage === 'entries-current') {
+    entriesContainer.className = 'container current';
+    formContainer.className = 'container hidden';
+  } else {
+    entriesContainer.className = 'container hidden';
+    formContainer.className = 'container current';
   }
 }
 
@@ -71,9 +82,9 @@ var entriesContainer = document.querySelector('#entriesContainer');
 var formContainer = document.querySelector('#formContainer');
 
 function entriesLinkHandler(event) {
-  entriesContainer.className = 'container';
+  entriesContainer.className = 'container current';
   formContainer.className = 'container hidden';
-
+  localStorage.setItem('current', 'entries-current');
 }
 
 entriesLink.addEventListener('click', entriesLinkHandler);
@@ -82,7 +93,8 @@ var newButton = document.querySelector('.newEntry');
 
 function newButtonHandler(event) {
   entriesContainer.className = 'container hidden';
-  formContainer.className = 'container';
+  formContainer.className = 'container current';
+  localStorage.setItem('current', 'form-current');
 }
 
 newButton.addEventListener('click', newButtonHandler);

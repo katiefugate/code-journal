@@ -16,6 +16,7 @@ function saveButtonHandler(event) {
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
   var entriesObj = { title, url, notes };
+  var liList = document.querySelectorAll('.entry');
   if (data.editing !== null) {
     var currentEditId = data.editing.entryId;
     for (var i = 0; i < data.entries.length; i++) {
@@ -23,6 +24,7 @@ function saveButtonHandler(event) {
         data.entries[i].title = title;
         data.entries[i].url = url;
         data.entries[i].notes = notes;
+        liList[i].replaceWith(addEntry(entriesObj));
         entriesContainer.className = 'container current';
         formContainer.className = 'container hidden';
       }
@@ -135,11 +137,3 @@ function editHandler(event) {
 }
 
 ul.addEventListener('click', editHandler);
-
-if (data.view === 'entries') {
-  entriesContainer.className = 'container current';
-  formContainer.className = 'container hidden';
-} else {
-  entriesContainer.className = 'container hidden';
-  formContainer.className = 'container current';
-}

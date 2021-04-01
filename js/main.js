@@ -15,7 +15,8 @@ function saveButtonHandler(event) {
   var title = form.elements.title.value;
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
-  var entriesObj = { title, url, notes };
+  var entryId;
+  var entriesObj = { title, url, notes, entryId };
   var liList = document.querySelectorAll('.entry');
   if (data.editing !== null) {
     var currentEditId = data.editing.entryId;
@@ -24,12 +25,12 @@ function saveButtonHandler(event) {
         data.entries[i].title = title;
         data.entries[i].url = url;
         data.entries[i].notes = notes;
+        entriesObj.entryId = currentEditId;
         liList[i].replaceWith(addEntry(entriesObj));
         entriesContainer.className = 'container current';
         formContainer.className = 'container hidden';
       }
     }
-    data.editing = null;
   } else {
     entriesObj.entryId = data.nextEntryId;
     data.nextEntryId++;
@@ -40,6 +41,7 @@ function saveButtonHandler(event) {
     formContainer.className = 'container hidden';
     ul.prepend(addEntry(entriesObj));
   }
+  data.editing = null;
   data.view = 'entries';
 }
 
@@ -126,7 +128,9 @@ function editHandler(event) {
   var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     var stringDataEntryId = data.entries[i].entryId.toString();
+
     if (currentEntryId === stringDataEntryId) {
+
       data.editing = data.entries[i];
       form.elements.title.value = data.entries[i].title;
       form.elements.url.value = data.entries[i].url;
@@ -134,6 +138,7 @@ function editHandler(event) {
       img.setAttribute('src', data.entries[i].url);
     }
   }
+
 }
 
 ul.addEventListener('click', editHandler);

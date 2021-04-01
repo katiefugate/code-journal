@@ -15,15 +15,33 @@ function saveButtonHandler(event) {
   var title = form.elements.title.value;
   var url = form.elements.url.value;
   var notes = form.elements.notes.value;
-  var entriesObj = { title, url, notes };
-  entriesObj.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(entriesObj);
-  img.setAttribute('src', 'images/placeholder-image-square.jpg');
-  form.reset();
-  entriesContainer.className = 'container';
-  formContainer.className = 'container hidden';
-  ul.prepend(addEntry(entriesObj));
+  var entryId;
+  var entriesObj = { title, url, notes, entryId };
+  var liList = document.querySelectorAll('.entry');
+  if (data.editing !== null) {
+    var currentEditId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (currentEditId === data.entries[i].entryId) {
+        data.entries[i].title = title;
+        data.entries[i].url = url;
+        data.entries[i].notes = notes;
+        entriesObj.entryId = currentEditId;
+        liList[i].replaceWith(addEntry(entriesObj));
+        entriesContainer.className = 'container current';
+        formContainer.className = 'container hidden';
+      }
+    }
+  } else {
+    entriesObj.entryId = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(entriesObj);
+    img.setAttribute('src', 'images/placeholder-image-square.jpg');
+    form.reset();
+    entriesContainer.className = 'container';
+    formContainer.className = 'container hidden';
+    ul.prepend(addEntry(entriesObj));
+  }
+  data.editing = null;
   data.view = 'entries';
 }
 
@@ -32,6 +50,7 @@ photoUrl.addEventListener('input', photoUrlHandler);
 form.addEventListener('submit', saveButtonHandler);
 
 function addEntry(entry) {
+
   var entryLi = document.createElement('li');
   var row = document.createElement('div');
   var columnHalf = document.createElement('div');
@@ -39,11 +58,13 @@ function addEntry(entry) {
   var columnHalf2 = document.createElement('div');
   var titleH2 = document.createElement('h2');
   var notesP = document.createElement('p');
+  var icon = document.createElement('i');
   entryLi.appendChild(row);
   row.appendChild(columnHalf);
   columnHalf.appendChild(img);
   row.appendChild(columnHalf2);
   columnHalf2.appendChild(titleH2);
+  columnHalf2.appendChild(icon);
   columnHalf2.appendChild(notesP);
   entryLi.className = 'entry';
   row.className = 'row';
@@ -51,9 +72,11 @@ function addEntry(entry) {
   columnHalf2.className = 'column-half';
   titleH2.className = 'title-h2';
   notesP.className = 'notes-p';
+  icon.className = 'fas fa-pen';
   img.setAttribute('src', entry.url);
   titleH2.textContent = entry.title;
   notesP.textContent = entry.notes;
+  entryLi.setAttribute('data-entry-id', entry.entryId);
   return entryLi;
 }
 
@@ -94,3 +117,26 @@ function newButtonHandler(event) {
 }
 
 newButton.addEventListener('click', newButtonHandler);
+
+function editHandler(event) {
+  if (event.target.className === 'fas fa-pen') {
+    entriesContainer.className = 'container hidden';
+    formContainer.className = 'container current';
+    data.view = 'entry-form';
+  }
+
+  var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
+  for (var i = 0; i < data.entries.length; i++) {
+    var stringDataEntryId = data.entries[i].entryId.toString();
+    if (currentEntryId === stringDataEntryId) {
+
+      data.editing = data.entries[i];
+      form.elements.title.value = data.entries[i].title;
+      form.elements.url.value = data.entries[i].url;
+      form.elements.notes.value = data.entries[i].notes;
+      img.setAttribute('src', data.entries[i].url);
+    }
+  }
+}
+
+ul.addEventListener('click', editHandler);

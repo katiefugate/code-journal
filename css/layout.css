@@ -85,10 +85,6 @@ ul {
     padding-right: 1.5rem;
   }
 
-  .row {
-    padding: 0 5%;
-  }
-
   .pageTitle {
     margin-left: 6%;
   }
@@ -96,4 +92,13 @@ ul {
 
 .form-img {
   height: 20rem;
+}
+
+.title-h2 {
+  display: inline-block;
+}
+
+.fas.fa-pen {
+  padding-top: 1.75rem;
+  float: right;
 }

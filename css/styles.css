@@ -112,6 +112,7 @@ ul {
   color: red;
   position: relative;
   bottom: 1.5rem;
+  width: fit-content;
 }
 
 .delete.clicked {

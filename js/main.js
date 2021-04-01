@@ -82,7 +82,9 @@ function addEntry(entry) {
 
 function contentLoadHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    ul.appendChild(addEntry(data.entries[i]));
+    if (data.entries[i] !== null) {
+      ul.appendChild(addEntry(data.entries[i]));
+    }
   }
 
   if (data.view === 'entries') {
@@ -127,6 +129,7 @@ newButton.addEventListener('click', newButtonHandler);
 
 var pageTitle = document.querySelector('.pageTitle');
 var deleteButton = document.querySelector('.delete');
+
 function editHandler(event) {
   if (event.target.className === 'fas fa-pen') {
     entriesContainer.className = 'container hidden';
@@ -135,7 +138,6 @@ function editHandler(event) {
     deleteButton.className = 'delete';
     data.view = 'entry-form';
   }
-
   var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     var stringDataEntryId = data.entries[i].entryId.toString();
@@ -172,3 +174,24 @@ function cancelHandler(event) {
 }
 
 cancelButton.addEventListener('click', cancelHandler);
+
+var confirmButton = document.querySelector('.confirmButton');
+
+function confirmHandler(event) {
+  var currentEditId = data.editing.entryId;
+  data.view = 'entries';
+  overlay.className = 'overlay hidden';
+  modal.className = 'modalContainer';
+  entriesContainer.className = 'container current';
+  formContainer.className = 'container hidden';
+  var liList = document.querySelectorAll('.entry');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (currentEditId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+      liList[i].replaceWith('');
+    }
+  }
+
+}
+
+confirmButton.addEventListener('click', confirmHandler);

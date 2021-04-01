@@ -82,9 +82,7 @@ function addEntry(entry) {
 
 function contentLoadHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i] !== null) {
-      ul.appendChild(addEntry(data.entries[i]));
-    }
+    ul.appendChild(addEntry(data.entries[i]));
   }
 
   if (data.view === 'entries') {
@@ -195,7 +193,7 @@ function confirmHandler(event) {
   for (var i = 0; i < data.entries.length; i++) {
     if (currentEditId === data.entries[i].entryId) {
       data.entries.splice(i, 1);
-      liList[i].replaceWith('');
+      liList[i].remove();
     }
   }
 

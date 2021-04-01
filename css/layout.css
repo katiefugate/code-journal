@@ -79,14 +79,12 @@ ul {
   }
 
   .codeJournal {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 3rem;
+    padding-left: 1.75rem;
     padding-right: 1.5rem;
   }
 
   .pageTitle {
-    margin-left: 6%;
+    margin-left: 3%;
   }
 }
 

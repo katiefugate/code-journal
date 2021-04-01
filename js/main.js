@@ -136,7 +136,8 @@ function editHandler(event) {
     formContainer.className = 'container current';
     pageTitle.textContent = 'Edit Entry';
     deleteButton.className = 'delete';
-    data.view = 'entry-form';
+    data.view = 'entries';
+    modal.className = 'modalContainer hidden';
   }
   var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
@@ -168,9 +169,15 @@ deleteButton.addEventListener('click', deleteHandler);
 var cancelButton = document.querySelector('.cancelButton');
 
 function cancelHandler(event) {
-  modal.className = 'modalContainer';
+  event.preventDefault();
+  modal.className = 'modalContainer hidden';
   overlay.className = 'overlay hidden';
-
+  entriesContainer.className = 'container hidden';
+  formContainer.className = 'container current';
+  form.elements.title.value = data.editing.title;
+  form.elements.url.value = data.editing.url;
+  form.elements.notes.value = data.editing.notes;
+  img.setAttribute('src', data.editing.url);
 }
 
 cancelButton.addEventListener('click', cancelHandler);

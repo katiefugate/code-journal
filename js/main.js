@@ -128,7 +128,6 @@ function editHandler(event) {
   var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     var stringDataEntryId = data.entries[i].entryId.toString();
-
     if (currentEntryId === stringDataEntryId) {
 
       data.editing = data.entries[i];
@@ -138,7 +137,6 @@ function editHandler(event) {
       img.setAttribute('src', data.entries[i].url);
     }
   }
-
 }
 
 ul.addEventListener('click', editHandler);

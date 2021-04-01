@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="overlay hidden"></div>
   <header>
     <div class="headerContainer">
     <div class="codeJournal">Code Journal</div>
@@ -48,6 +49,12 @@
             <div class="inputTitle">Notes</div>
             <textarea id="notes" name="notes" rows="5" cols="33" required></textarea>
             <button type="submit" id="saveButton">SAVE</button>
+            <a href="#" class="delete hidden">Delete Entry</a>
+            <div class="modalContainer hidden">
+              <h3 class="deleteQ">Are you sure you want to delete this entry?</h3>
+              <button class="cancelButton">CANCEL</button>
+              <button class="confirmButton">CONFIRM</button>
+            </div>
           </div>
         </div>
       </form>

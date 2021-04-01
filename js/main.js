@@ -114,14 +114,27 @@ function newButtonHandler(event) {
   entriesContainer.className = 'container hidden';
   formContainer.className = 'container current';
   data.view = 'entry-form';
+  pageTitle.textContent = 'Entry';
+  form.elements.title.value = '';
+  form.elements.url.value = '';
+  form.elements.notes.value = '';
+  img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  a.className = 'hidden';
 }
 
 newButton.addEventListener('click', newButtonHandler);
-
+var pageTitle = document.querySelector('.pageTitle');
+var columnFull = document.querySelector('.column-full');
+var a = document.createElement('a');
 function editHandler(event) {
   if (event.target.className === 'fas fa-pen') {
     entriesContainer.className = 'container hidden';
     formContainer.className = 'container current';
+    pageTitle.textContent = 'Edit Entry';
+    columnFull.appendChild(a);
+    a.textContent = 'Delete Entry';
+    a.setAttribute('href', '#');
+    a.className = 'delete';
     data.view = 'entry-form';
   }
 

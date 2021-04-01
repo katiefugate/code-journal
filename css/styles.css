@@ -107,3 +107,9 @@ ul {
 .fas.fa-pen {
   color: #562b81;
 }
+
+.delete {
+  color: red;
+  position: relative;
+  bottom: 1.5rem;
+}

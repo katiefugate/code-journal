@@ -114,17 +114,29 @@ function newButtonHandler(event) {
   entriesContainer.className = 'container hidden';
   formContainer.className = 'container current';
   data.view = 'entry-form';
+  pageTitle.textContent = 'Entry';
+  form.elements.title.value = '';
+  form.elements.url.value = '';
+  form.elements.notes.value = '';
+  img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  deleteButton.className = 'hidden';
+  modal.className = 'modalContainer hidden';
 }
 
 newButton.addEventListener('click', newButtonHandler);
+
+var pageTitle = document.querySelector('.pageTitle');
+var deleteButton = document.querySelector('.delete');
 
 function editHandler(event) {
   if (event.target.className === 'fas fa-pen') {
     entriesContainer.className = 'container hidden';
     formContainer.className = 'container current';
-    data.view = 'entry-form';
+    pageTitle.textContent = 'Edit Entry';
+    deleteButton.className = 'delete';
+    data.view = 'entries';
+    modal.className = 'modalContainer hidden';
   }
-
   var currentEntryId = event.target.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     var stringDataEntryId = data.entries[i].entryId.toString();
@@ -140,3 +152,51 @@ function editHandler(event) {
 }
 
 ul.addEventListener('click', editHandler);
+
+var overlay = document.querySelector('.overlay');
+var modal = document.querySelector('.modalContainer');
+
+function deleteHandler(event) {
+  modal.className = 'modalContainer';
+  overlay.className = 'overlay';
+  deleteButton.className = 'delete clicked';
+}
+
+deleteButton.addEventListener('click', deleteHandler);
+
+var cancelButton = document.querySelector('.cancelButton');
+
+function cancelHandler(event) {
+  event.preventDefault();
+  modal.className = 'modalContainer hidden';
+  overlay.className = 'overlay hidden';
+  entriesContainer.className = 'container hidden';
+  formContainer.className = 'container current';
+  form.elements.title.value = data.editing.title;
+  form.elements.url.value = data.editing.url;
+  form.elements.notes.value = data.editing.notes;
+  img.setAttribute('src', data.editing.url);
+}
+
+cancelButton.addEventListener('click', cancelHandler);
+
+var confirmButton = document.querySelector('.confirmButton');
+
+function confirmHandler(event) {
+  var currentEditId = data.editing.entryId;
+  data.view = 'entries';
+  overlay.className = 'overlay hidden';
+  modal.className = 'modalContainer';
+  entriesContainer.className = 'container current';
+  formContainer.className = 'container hidden';
+  var liList = document.querySelectorAll('.entry');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (currentEditId === data.entries[i].entryId) {
+      data.entries.splice(i, 1);
+      liList[i].remove();
+    }
+  }
+
+}
+
+confirmButton.addEventListener('click', confirmHandler);

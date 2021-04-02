@@ -10,7 +10,8 @@ header {
 }
 
 .inputTitle,
-.pageTitle {
+.pageTitle,
+.deleteQ {
   font-family: 'Nunito Sans', sans-serif;
   letter-spacing: 0.75px;
 }
@@ -106,4 +107,77 @@ ul {
 
 .fas.fa-pen {
   color: #562b81;
+}
+
+.delete {
+  color: red;
+  position: relative;
+  bottom: 1.5rem;
+  width: fit-content;
+}
+
+.delete.clicked {
+  opacity: 0.5;
+}
+
+.modalContainer {
+  border: 1px solid black;
+  text-align: center;
+  height: 8rem;
+  width: 75%;
+  position: fixed;
+  right: 12%;
+  top: 50%;
+  background-color: white;
+  border-radius: 0.25rem;
+}
+
+.cancelButton {
+  float: left;
+  margin-left: 1.5rem;
+  background-color: rgb(177, 177, 177);
+  padding: 0.35rem 1rem;
+  border: 1px solid rgb(177, 177, 177);
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.confirmButton {
+  float: right;
+  margin-right: 1.5rem;
+  background-color: red;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid red;
+  border-radius: 0.25rem;
+  color: white;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .modalContainer {
+    width: 25rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.719);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.confirmButton:focus,
+.cancelButton:focus {
+  outline: none;
+}
+
+.deleteQ {
+  font-size: 1rem;
 }
